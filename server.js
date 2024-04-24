@@ -1,9 +1,10 @@
 // Importar o módulo do Express
 
 const express = require('express');
-const sequelize = require('./config/sequelize')
-const router = require('./routes/router');
+const sequelize = require('./config/sequelize.js')
+const router = require('./routes/router.js');
 require('dotenv').config();
+
 
 //Testar a conexão com o banco de dados
 sequelize.authenticate()

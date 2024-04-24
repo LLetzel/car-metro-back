@@ -10,7 +10,7 @@ router.get('/usuario', usuarioController.getAll);
 router.get('/usuario/:id', usuarioController.getById)
 
 //cria um usuario passando informação no body
-router.post('/usuario', usuarioController.create);
+router.post('/usuario', usuarioController.createUsuario);
 
 //INSERIR OUTRAS ROTAS --> 
 /* router.get('/turmas', turmasController.getAll)
