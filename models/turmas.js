@@ -2,29 +2,20 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../config/sequelize');
 
-const Usuario = sequelize.define('Usuarios', {
+const Turmas = sequelize.define('Turmas', {
     //define as informações da tabela colunas
 
-    idUsuarios: {
+    idTurmas: {
         type: Sequelize.INTEGER,
         autoIncrement: true, // Define essa coluna como chave primária
         primaryKey: true // Indica q é uma chave primaria autoincrementavel
     },
 
-    nome: Sequelize.STRING,
-    email: Sequelize.STRING,
-    cpf: Sequelize.STRING,
-    senha: Sequelize.STRING,
-    celular: Sequelize.STRING,
-    cep: Sequelize.STRING,
-    logradouro: Sequelize.STRING,
-    bairro: Sequelize.STRING,
-    cidade: Sequelize.STRING,
-    estado: Sequelize.STRING,
-    foto: Sequelize.STRING,
-    Tipos_Usuarios_idTipos_Usuarios: Sequelize.NUMBER,
-
-
+    codigo: Sequelize.STRING,
+    descricao: Sequelize.STRING,
+    inicio: Sequelize.DATE,
+    fim: Sequelize.DATE,
+    fotos: Sequelize.STRING,
 },
 {
     //precisa disso pq não tem as colunas createdAT e updateAt no bd
@@ -32,4 +23,4 @@ const Usuario = sequelize.define('Usuarios', {
 
 });
 
-module.exports = Usuario;
+module.exports = Turmas;
