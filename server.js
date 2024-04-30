@@ -35,7 +35,7 @@ const app = express();
 // Configurar o Express para aceitar dados no formato JSON
 
 app.use(express.json());
-app.use(router)
+app.use(router);
 
 //app.use(cookie-parser)
 
