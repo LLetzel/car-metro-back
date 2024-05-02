@@ -13,10 +13,18 @@ router.get('/usuario/:id', usuarioController.getById);
 
 //cria um usuario passando informação no body
 router.post('/usuario', usuarioController.createUsuario);
+router.put('/usuario/:cpf', usuarioController.updateUsuario);
+
 
 //INSERIR OUTRAS ROTAS --> 
+//mostra turmas
 router.get('/turmas', turmasController.getAll)
 router.get('/turmas/:id', turmasController.getById)
+//cria uma turma
+router.post('/turmas', turmasController.createTurmas)
+// modificar dados 
+router.put('/turmas/:codigo', turmasController.updateTurmas)
+
 
 // router.get('/tiposdeusuarios', tiposdeusuariosController.getAll)
 // router.get('/tiposdeusuarios/:id', tiposdeusuariosController.getById)

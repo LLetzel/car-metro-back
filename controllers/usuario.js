@@ -12,6 +12,7 @@ exports.getById = async(req, res) => {
     res.json(usuarioEncontrado);
 }
 
+// Cadastro um usuário
 exports.createUsuario = async (req,res) => {
     const usuarioCadastrado = await Usuario.findOne({ where: {cpf: req.body.cpf}});
     // Verificação duplicidade do usuario cadastrado
@@ -20,6 +21,15 @@ exports.createUsuario = async (req,res) => {
     }
     const usuarioCriado = await Usuario.create(req.body)
     console.log("usuarioCriado", usuarioCriado)
-    return res.send("deu certo viadinho!!")
+    return res.send("Usuario cadastrado com sucesso!")
     // res.json(usuario)
 };
+
+//alterando dados cadastrais
+exports.updateUsuario = async(req,res) => {
+    try {
+
+    } catch {
+
+    }
+}
