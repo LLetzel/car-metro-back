@@ -39,22 +39,25 @@ exports.createTurmas = async (req, res) => {
 
 //  alterando dados cadastrais 
 
-exports.updateTurmas = async(req,res) => {
+exports.updateTurmas = async (req, res) => {
+
     const codigoTurma = req.params.codigo;
+
     try {
         const turmasEncontrado = await Turmas.findOne({ where: { codigo: codigoTurma } });
 
-        if(turmasCadastrado){
+        if (turmasEncontrado) {
+
             delete req.body.codigo;
 
             const [numRowsUpdated] = await Turmas.update(req.body, {
-                where: {codigo: codigoTurma}
+                where: { codigo: codigoTurma }
             });
 
-        if (numRowsUpdated > 0 ) {
-            const turmaAtualizada = await Turmas.findOne({where: { codigo: codigoTurma}});
-            return res.send({message: 'Turma Atualizada com sucesso', turmacomdadosnovos: turmaAtualizada});
-        }
+            if (numRowsUpdated > 0) {
+                const turmaAtualizada = await Turmas.findOne({ where: { codigo: codigoTurma } });
+                return res.send({ message: 'Turma Atualizada com sucesso', turmacomdadosnovos: turmaAtualizada });
+            }
         }
 
 

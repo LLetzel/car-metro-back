@@ -27,9 +27,26 @@ exports.createUsuario = async (req,res) => {
 
 //alterando dados cadastrais
 exports.updateUsuario = async(req,res) => {
+    cpfUsuario = req.params.cpf
+    // console.log(cpfUsuario)
     try {
+        const usuarioEncontrado = await Usuario.findOne({ where: { cpf: req.body.cpf } });
+
+        if(usuarioEncontrado){
+            delete req.body.cpf;
+
+            const [numRowsUpdated] = await Usuario.update(req.body, {
+                where: {cpf: cpfUsuario}
+            });
+
+        if (numRowsUpdated > 0 ) {
+            const usuarioAtualizado = await Usuario.findOne({where: { cpf: cpfUsuario}});
+            return res.send({message: 'Usuário atualizado com sucesso', usuariocomdadosnovos: usuarioAtualizado});
+        }
+        }
+
 
     } catch {
-
+        return res.status(404).send("Usuário não encontrado")
     }
 }
