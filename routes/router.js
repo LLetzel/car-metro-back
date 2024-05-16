@@ -14,6 +14,7 @@ router.get('/usuario/:id', usuarioController.getById);
 //cria um usuario passando informação no body
 router.post('/usuario', usuarioController.createUsuario);
 router.put('/usuario/:cpf', usuarioController.updateUsuario);
+router.delete('/usuario/:cpf', usuarioController.deleteUsuario);
 
 
 //INSERIR OUTRAS ROTAS --> 
@@ -24,6 +25,7 @@ router.get('/turmas/:id', turmasController.getById)
 router.post('/turmas', turmasController.createTurmas)
 // modificar dados 
 router.put('/turmas/:codigo', turmasController.updateTurmas)
+// router.delete('./turmas/:codigo', turmasController.deleteTurmas)
 
 
 // router.get('/tiposdeusuarios', tiposdeusuariosController.getAll)

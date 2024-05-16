@@ -41,7 +41,7 @@ exports.createTurmas = async (req, res) => {
 
 exports.updateTurmas = async (req, res) => {
 
-    const codigoTurma = req.params.codigo;
+    const codigoTurma = req.params.codigo; //criando variavel pegando as informações da rota
 
     try {
         const turmasEncontrado = await Turmas.findOne({ where: { codigo: codigoTurma } });
@@ -49,6 +49,9 @@ exports.updateTurmas = async (req, res) => {
         if (turmasEncontrado) {
 
             delete req.body.codigo;
+            delete req.body.descricao;
+            delete req.body.inicio;
+            delete req.body.fim;
 
             const [numRowsUpdated] = await Turmas.update(req.body, {
                 where: { codigo: codigoTurma }
@@ -57,11 +60,18 @@ exports.updateTurmas = async (req, res) => {
             if (numRowsUpdated > 0) {
                 const turmaAtualizada = await Turmas.findOne({ where: { codigo: codigoTurma } });
                 return res.send({ message: 'Turma Atualizada com sucesso', turmacomdadosnovos: turmaAtualizada });
+            } else {
+                return res.send({ message: 'Turma encontrada, porém sem dados novos para atualizar' });
             }
+        }
+        else {
+            return res.status(404).send("Não existe turma cadastrada com esse código")
+        
         }
 
 
-    } catch {
-        return res.status(404).send("Turma não encontrada")
+    } catch (error){
+        console.error("Eroo ao atualizar turma:", error)
+        return res.status(404).send("Ocorreu um erro ao atualizar a turma. ");
     }
 }

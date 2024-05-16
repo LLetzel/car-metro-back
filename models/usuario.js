@@ -11,9 +11,9 @@ const Usuario = sequelize.define('Usuarios', {
         primaryKey: true // Indica q é uma chave primaria autoincrementavel
     },
 
-    nome: Sequelize.STRING,
+    nome: Sequelize.STRING, 
     email: Sequelize.STRING,
-    cpf: Sequelize.STRING,
+    cpf: Sequelize.STRING, 
     senha: Sequelize.STRING,
     celular: Sequelize.STRING,
     cep: Sequelize.STRING,
