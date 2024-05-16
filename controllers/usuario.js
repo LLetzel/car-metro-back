@@ -33,6 +33,7 @@ exports.createUsuario = async (req, res) => {
     } else {
         return res.send("Erro ao cadastrar o usuario!")
     }
+    // comentario
     return res.send("Usuário Cadastrado!");
     // res.json(usuario)
 }
