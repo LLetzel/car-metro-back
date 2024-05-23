@@ -63,7 +63,6 @@ exports.updateUsuario = async (req, res) => {
             }
         } else {
             return res.status(404).send("Não existe usuário cadastrado com esse cpf")
-
         }
 
 
@@ -73,16 +72,21 @@ exports.updateUsuario = async (req, res) => {
 }
 
 exports.deleteUsuario = async (req, res) => {
-    cpfUsuario = req.params.cpf
     try {
-        const usuarioDeletado = await Usuario.findOne({ where: { cpf: req.body.cpf } });
-        if (usuarioDeletado) {
-            const [numRowsDeleted] = await Usuario.delete({ where: { cpf: cpfUsuario } });
-            return res.send("Usuário deletado com sucesso!")
-        } else {
-            return res.send('Usuário não encontrado!!')
+        const { id } = req.params; //Define o que o sistema vai buscar para identificar o usuário que será deletado(no url)
+        const usuario = await Usuario.findByPk(id); // FindByPK = FindOne para id  || Armazena o usuário que encontrou no banco de dados
+        if (!usuario) { 
+            return res;status(404).send('Usuário não encontrado');
         }
-    } catch {
-        return res.status(404).send("Usuário não encontrado")
+
+        const desvincular = await UsuariosTurmas.findOne({ where: {Usuarios_idUsuarios: usuario.idUsuarios}});
+        if (desvincular) {
+            await desvincular.destroy(); //deleta o que tiver na tabela relacional 
+        }
+        await usuario.destroy(); // deleta usuário
+        return res.send('Usuário deletado com sucesso');
+    } catch (error) {
+        console.error('Erro ao deletar usuário:', error);
+        return res.status(404).send("Usuário não encontrado");
     }
 }
